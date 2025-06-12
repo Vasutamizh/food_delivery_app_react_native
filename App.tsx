@@ -7,11 +7,22 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from "./pages/LoginScreen";
+import HomePage from "./pages/HomePage";
+import CartPage from "./pages/CartPage";
+import 'react-native-url-polyfill/auto';
+
+
 import {
+  Button,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -58,7 +69,8 @@ function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    // backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    
   };
 
   /*
@@ -72,47 +84,23 @@ function App(): React.JSX.Element {
    */
   const safePadding = '5%';
 
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header/>
-        </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </View>
+   <NavigationContainer>
+    <Stack.Navigator initialRouteName='Login'>
+      <Stack.Screen name='Login' component={LoginScreen}/>
+      <Stack.Screen name='Home' component={HomePage}/>
+      <Stack.Screen name='Cart' component={CartPage}/>
+    </Stack.Navigator>
+   </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+    margin: 'auto',
+    paddingTop: 10
   },
   sectionTitle: {
     fontSize: 24,
@@ -126,6 +114,16 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
+  body:{
+    marginTop: 40,
+    marginLeft: 20,
+    width: 300,
+    height: 600,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 export default App;
