@@ -4,6 +4,8 @@
 
     -- Node (v18)
     -- Android Studio(Without Android Virtual Emulator -- uncheck this during installation).
+    -- Supabase Account that consists of bucket(Storage) with food images, Table(foods, cart), Authentication(Email provider with user details in the supabase account for auth).
+    -- The created project URL & Annon Key for the supabase API. 
 
 If your using real mobile phone as output screem then, 
 you need adb.
@@ -26,6 +28,19 @@ After cloning this repo;
 # npm install
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+
+Before Starting you will need to enter the supabase project url & Api key.
+
+Edit projectRoot/src/utils/SupabaseClient.tsx
+
+Assign Values to the following variables.
+
+------------------------------------------
+const supabaseUrl = "project url";
+
+const supabaseAnonKey = "your api key";
+------------------------------------------
+
 
 ## Step 1: Start Metro
 
